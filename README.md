@@ -76,18 +76,51 @@ Public-only examples:
 
 Do not use public proxy/database URLs for internal runtime traffic between Railway services. They are slower and may incur egress/network charges.
 
-## Default model configuration
+## OpenAI-compatible model configuration
 
-This template is preconfigured for a single-user OpenRouter deployment.
+This template is configured for a single-user deployment with any OpenAI-compatible API.
+Use OpenAI, OpenRouter, a LiteLLM proxy, vLLM, or another endpoint that accepts
+OpenAI-style chat/completions and embeddings requests.
 
-- default LLM model: `openrouter/openai/gpt-4o-mini`
-- default embedding model: `openrouter/google/gemini-embedding-2-preview`
+Required LLM variables:
 
-`openrouter/google/gemma-4-26b-a4b-it` can still be used as an advanced override, but it is not the stable publishable default for full Cognify pipelines.
+- `LLM_PROVIDER=custom`
+- `LLM_ENDPOINT=<openai-compatible-base-url>`
+- `LLM_MODEL=<chat-model-name>`
+- `LLM_API_KEY=<api-key>`
+
+Required embedding variables:
+
+- `EMBEDDING_PROVIDER=litellm`
+- `EMBEDDING_ENDPOINT=<openai-compatible-base-url>`
+- `EMBEDDING_MODEL=<embedding-model-name>`
+- `EMBEDDING_DIMENSIONS=<embedding-vector-size>`
+- optionally `EMBEDDING_API_KEY=<embedding-api-key>` if you do not want to reuse `LLM_API_KEY`
+
+Example OpenAI official configuration:
+
+- `LLM_ENDPOINT=https://api.openai.com/v1`
+- `LLM_MODEL=gpt-4o-mini`
+- `EMBEDDING_ENDPOINT=https://api.openai.com/v1`
+- `EMBEDDING_MODEL=text-embedding-3-large`
+- `EMBEDDING_DIMENSIONS=3072`
+
+Example OpenRouter configuration:
+
+- `LLM_ENDPOINT=https://openrouter.ai/api/v1`
+- `LLM_MODEL=openrouter/openai/gpt-4o-mini`
+- `EMBEDDING_ENDPOINT=https://openrouter.ai/api/v1`
+- `EMBEDDING_MODEL=openrouter/google/gemini-embedding-2-preview`
+- `EMBEDDING_DIMENSIONS=3072`
 
 ## Required user-provided variables
 
 - `LLM_API_KEY`
+- `LLM_ENDPOINT`
+- `LLM_MODEL`
+- `EMBEDDING_ENDPOINT`
+- `EMBEDDING_MODEL`
+- `EMBEDDING_DIMENSIONS`
 - optionally `EMBEDDING_API_KEY` if you do not want to reuse `LLM_API_KEY`
 
 ## Publish checklist

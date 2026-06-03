@@ -21,23 +21,23 @@
       },
       "variables": {
         "LLM_API_KEY": {
-          "description": "Your OpenRouter API key. Cognee uses it for the OpenRouter LLM and, by default, for embeddings too.",
+          "description": "Your API key for an OpenAI-compatible chat/completions endpoint. Cognee also reuses it for embeddings unless EMBEDDING_API_KEY is set.",
           "value": ""
         },
         "LLM_PROVIDER": {
-          "description": "Cognee LLM provider for OpenRouter's OpenAI-compatible API",
+          "description": "Cognee LLM provider for an OpenAI-compatible custom API",
           "value": "custom"
         },
         "LLM_ENDPOINT": {
-          "description": "OpenRouter OpenAI-compatible API base URL for chat/completions",
-          "value": "https://openrouter.ai/api/v1"
+          "description": "OpenAI-compatible API base URL for chat/completions, such as a hosted API, LiteLLM proxy, or vLLM proxy",
+          "value": ""
         },
         "LLM_MODEL": {
-          "description": "Reliable default OpenRouter model for Cognify extraction, summarization, and responses. Gemma can still be used as an advanced override.",
-          "value": "openrouter/openai/gpt-4o-mini"
+          "description": "Chat model name accepted by your OpenAI-compatible provider",
+          "value": ""
         },
         "LLM_INSTRUCTOR_MODE": {
-          "description": "Structured-output mode for the OpenRouter-backed LLM adapter",
+          "description": "Structured-output mode for the OpenAI-compatible LLM adapter",
           "value": "json_schema_mode"
         },
         "EMBEDDING_PROVIDER": {
@@ -45,19 +45,19 @@
           "value": "litellm"
         },
         "EMBEDDING_ENDPOINT": {
-          "description": "OpenRouter OpenAI-compatible API base URL for embeddings",
-          "value": "https://openrouter.ai/api/v1"
+          "description": "OpenAI-compatible API base URL for embeddings. Use the same endpoint as LLM_ENDPOINT when your provider supports embeddings there.",
+          "value": ""
         },
         "EMBEDDING_MODEL": {
-          "description": "OpenRouter embedding model for semantic indexing",
-          "value": "openrouter/google/gemini-embedding-2-preview"
+          "description": "Embedding model name accepted by your OpenAI-compatible provider",
+          "value": ""
         },
         "EMBEDDING_DIMENSIONS": {
-          "description": "Embedding vector dimensions for Gemini Embedding 2 Preview",
+          "description": "Embedding vector dimensions returned by EMBEDDING_MODEL. Update this to match your selected embedding model.",
           "value": "3072"
         },
         "EMBEDDING_API_KEY": {
-          "description": "Optional separate OpenRouter API key for embeddings. Leave empty to reuse LLM_API_KEY.",
+          "description": "Optional separate API key for embeddings. Leave empty to reuse LLM_API_KEY.",
           "value": ""
         },
         "DB_PROVIDER": {
