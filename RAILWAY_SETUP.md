@@ -77,15 +77,41 @@ In Railway:
 Set these variables on the `cognee-api` service:
 
 - `LLM_API_KEY`
+- `LLM_ENDPOINT`
+- `LLM_MODEL`
+- `EMBEDDING_ENDPOINT`
+- `EMBEDDING_MODEL`
+- `EMBEDDING_DIMENSIONS`
 - optional `EMBEDDING_API_KEY` if not reusing `LLM_API_KEY`
 
-The template defaults are designed for:
+The template is designed for any OpenAI-compatible provider:
 
-- OpenRouter LLM via `openrouter/openai/gpt-4o-mini`
-- OpenRouter embeddings via `openrouter/google/gemini-embedding-2-preview`
+- `LLM_PROVIDER=custom`
+- `LLM_ENDPOINT=<openai-compatible-base-url>`
+- `LLM_MODEL=<chat-model-name>`
+- `EMBEDDING_PROVIDER=litellm`
+- `EMBEDDING_ENDPOINT=<openai-compatible-base-url>`
+- `EMBEDDING_MODEL=<embedding-model-name>`
+- `EMBEDDING_DIMENSIONS=<embedding-vector-size>`
 - single-user mode
 - Postgres graph persistence
 - pgvector vector persistence
+
+Example OpenAI official values:
+
+- `LLM_ENDPOINT=https://api.openai.com/v1`
+- `LLM_MODEL=gpt-4o-mini`
+- `EMBEDDING_ENDPOINT=https://api.openai.com/v1`
+- `EMBEDDING_MODEL=text-embedding-3-large`
+- `EMBEDDING_DIMENSIONS=3072`
+
+Example OpenRouter values:
+
+- `LLM_ENDPOINT=https://openrouter.ai/api/v1`
+- `LLM_MODEL=openrouter/openai/gpt-4o-mini`
+- `EMBEDDING_ENDPOINT=https://openrouter.ai/api/v1`
+- `EMBEDDING_MODEL=openrouter/google/gemini-embedding-2-preview`
+- `EMBEDDING_DIMENSIONS=3072`
 
 ## 4. Configure `cognee-mcp`
 
@@ -114,7 +140,7 @@ Set these variables on the `cognee-mcp` service:
 - `TRANSPORT_MODE=sse`
 - `MCP_ALLOWED_HOSTS=<your-public-mcp-domain>,<your-public-mcp-domain>:*`
 
-You can also reuse the same OpenRouter and database variables as the backend, if you want the MCP service to execute backend-facing operations consistently.
+You can also reuse the same OpenAI-compatible model and database variables as the backend, if you want the MCP service to execute backend-facing operations consistently.
 
 ## 5. Generate the public MCP domain
 
